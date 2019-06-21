@@ -23,7 +23,6 @@ public class LoginController {
 	
 	@RequestMapping("/logined")
 	public Object logined(User user,HttpSession session) {
-		System.out.println("你好");
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
 			User resultUser= loginService.getUser(user);
