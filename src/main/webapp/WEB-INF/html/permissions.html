@@ -31,12 +31,8 @@
 		</nav>
 		
 		<br />
-		<div class="container" >
-			<a href="applylist.html"><span class="btn btn-primary">请假列表</span></a>
-			<br /><br />
-			<a href="writenote.html"><span class="btn btn-primary">请假申请</span></a>
-			<br /><br />
-			<a href="approvelist.html"><span class="btn btn-primary">请假审批</span></a>
+		<div id="menu" class="container" >
+		
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -51,10 +47,23 @@
 				}
 			}
 		})
+		$.ajax({
+			url:"menu",
+			success:function(data){
+				if(data.success==true){
+					var temp="";
+					for(i=0;i<data.data.length;i++){
+						temp+=data.data[i]
+					}
+					$("#menu").html(temp);
+				}else{
+					alert("出现未知错误");
+				}
+			}
+		})
 		$("#logout").click(function(){
 			window.location.href="logout";
-		})	
-	
+		})
 		
 	</script>
 </html>

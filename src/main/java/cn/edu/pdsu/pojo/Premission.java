@@ -1,33 +1,43 @@
 package cn.edu.pdsu.pojo;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Premission {
 	private String id;
-	private char type;
-	private String link;
-	private String menu;
+	private String name;
+	private String type;
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	private Set<Menu> menus=new HashSet<>();
+	private Set<Link> links=new HashSet<>();
+	public Set<Menu> getMenus() {
+		return menus;
+	}
+	public void setMenus(Set<Menu> menus) {
+		this.menus = menus;
+	}
+	public Set<Link> getLinks() {
+		return links;
+	}
+	public void setLinks(Set<Link> links) {
+		this.links = links;
+	}
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public char getType() {
-		return type;
+	public String getName() {
+		return name;
 	}
-	public void setType(char type) {
-		this.type = type;
-	}
-	public String getLink() {
-		return link;
-	}
-	public void setLink(String link) {
-		this.link = link;
-	}
-	public String getMenu() {
-		return menu;
-	}
-	public void setMenu(String menu) {
-		this.menu = menu;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public Premission() {
 		super();

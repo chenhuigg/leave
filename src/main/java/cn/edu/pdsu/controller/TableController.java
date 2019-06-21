@@ -31,8 +31,8 @@ public class TableController {
 	public Object commit(Table table,HttpSession session) {
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
-			table.setFrom_time(table.getFrom_time().replace("T", ""));
-			table.setTo_time(table.getTo_time().replace("T", ""));
+			table.setFrom_time(table.getFrom_time().replace("T", " "));
+			table.setTo_time(table.getTo_time().replace("T", " "));
 			User user=(User) session.getAttribute("user");
 			Map<String, Object> map=new HashMap<>();
 			User teacher = userService.getUserByUserid(user);
@@ -118,13 +118,15 @@ public class TableController {
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
 			User user=(User) session.getAttribute("user");
-			Map<String, Object> map=new HashMap<>();
-			map.put("id", id);
-			map.put("approveid",user.getId());
-			map.put("state", 2);
-			int i= tableService.access(map);
-			if(i>0) {
-				ajaxResult.setSuccess(true);
+			if(user!=null) {
+				Map<String, Object> map=new HashMap<>();
+				map.put("id", id);
+				map.put("approveid",user.getId());
+				map.put("state", 2);
+				int i= tableService.access(map);
+				if(i>0) {
+					ajaxResult.setSuccess(true);
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
