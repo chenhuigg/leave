@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户中心</title>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+						<div class="navbar-brand">
+							<a href="permissions.html" style="text-decoration: none;color: gray;">请假管理系统</a>
+						</div>
+					<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</div>
+				<div class="pull-right navbar-collapse collapse">
+					<div class="navbar-btn">
+						<span>您好</span><label><a id="usernameshow" href="usermain.html"></a></label>
+						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
+						<button id="logout" class="btn btn-danger">退出</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="h3 text-center">用户信息</div>
+			<div class="center-block" style="width: 300px;">
+				<form id="form" action="" method="post">
+					<div class="form-group">
+						<label>账号</label>
+						<input id="id" class="form-control" type="text" disabled value="" />
+					</div>
+					<div class="form-group">
+						<label>用户名</label>
+						<input id="username" name="username" class="form-control" type="text" value=""/>
+					</div>
+					<div class="form-group">
+						<label>用户密码</label>
+						<input id="password" name="password" class="form-control" type="password" value="" />
+					</div>
+					<div class="form-group">
+						<label >确认密码</label>
+						<input id="affirm_password" class="form-control" type="password" value="" />
+					</div>
+				</form>
+				<button id="submit" class="btn btn-success btn-block">提交修改</button>
+			</div>
+		</div>
+		<script>
+		 $.ajax({
+			url:"getUser",
+			success:function(data){
+				if(data.success==true){
+					$("#usernameshow").text(data.data)
+				}else{
+					alert("用户状态不存在，请重新登录");
+					window.location.href="login.html";
+				}
+			}
+		}) 
+		 $.ajax({
+			url:"getUserDetail",
+			success:function(data){
+				if(data.success==true){
+					var user=data.data;
+					$("#id").val(user.id)
+					$("#username").val(user.username);
+					$("#password").val(user.password);
+				}else{
+					alert("用户信息拉取失败");
+				}
+			},
+			dataType:"json"
+		}) 
+		$("#logout").click(function(){
+			window.location.href="logout";
+		})
+		 $("#submit").click(function(){
+			var username=$("#username").val();
+			var password=$("#password").val();
+			var affirm_password=$("#affirm_password").val();
+			if(username==""||username.length==0){
+				alert("用户名不能为空");
+				return;
+			}
+			if(password==""||password.length==0){
+				alert("密码不能为空");
+				return;
+			}
+			if(affirm_password==""||affirm_password.length==0){
+				alert("确认密码不能为空");
+				return;
+			}
+			if(!(password==affirm_password)){
+				alert("两次密码不一致");
+				return;
+			}
+			$.ajax({
+				url:"updateUser",
+				data:$("#form").serialize(),
+				success:function(data){
+					if(data.success==true){
+						alert("修改成功");
+						window.location.href="usermain.html";
+					}else{
+						alert("修改失败");
+					}
+				},
+				dataType:"json"
+			})
+		}) 
+		</script>
+	</body>
+	
+</html>

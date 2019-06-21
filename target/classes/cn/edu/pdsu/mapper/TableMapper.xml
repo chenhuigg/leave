@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.pdsu.mapper.TableMapper">
+	<resultMap type="cn.edu.pdsu.pojo.Table" id="mytable">
+		<result column="username" property="user.username" />
+	</resultMap>
+	
+	<select id="selectAllByApproveid" resultMap="mytable" parameterType="cn.edu.pdsu.pojo.User">
+		SELECT *,act_user.username username
+		FROM act_table
+		INNER JOIN act_user
+		ON act_table.userid=act_user.id
+		WHERE approveid=#{id}
+		ORDER BY time DESC
+	</select>
+
+</mapper>

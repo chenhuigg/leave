@@ -1,0 +1,31 @@
+package cn.edu.pdsu.pojo;
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Role {
+	private String id;
+	private String rolename;
+	private Set<Premission> premissions=new HashSet<>();
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getRolename() {
+		return rolename;
+	}
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
+	}
+	public Role() {
+		super();
+	}
+	public Set<Premission> getPremissions() {
+		return premissions;
+	}
+	public void setPremissions(Set<Premission> premissions) {
+		this.premissions = premissions;
+	}
+}
