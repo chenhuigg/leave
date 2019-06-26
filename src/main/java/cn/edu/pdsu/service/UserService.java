@@ -1,9 +1,12 @@
 package cn.edu.pdsu.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import cn.edu.pdsu.mapper.UserMapper;
+import cn.edu.pdsu.pojo.Page;
 import cn.edu.pdsu.pojo.User;
 
 @Service
@@ -11,14 +14,18 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 
-	//修改用户信息
+	//鏇存柊褰撳墠鐢ㄦ埛淇℃伅
 	public int updateUser(User myUser) {
 		return userMapper.updateUser(myUser);
 	}
 	
-	//获得学生对应的老师
+	//閫氳繃鐢ㄦ埛Id鑾峰彇鐢ㄦ埛淇℃伅
 	public User getUserByUserid(User user) {
 		return userMapper.getUserByUserid(user);
+	}
+
+	public List<User> getLocationPageUser(Page page) {
+		return userMapper.getUserByLimit(page);
 	}
 	
 

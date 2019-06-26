@@ -1,102 +1,158 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<title>用户维护</title>
-		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-		<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
-		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
-	</head>
-	<body>
-		<nav class="navbar navbar-default">
-			<div class="container">
-				<div class="navbar-header">
-						<div class="navbar-brand">
-							<a href="permissions.html" style="text-decoration: none;color: gray;">请假管理系统</a>
-						</div>
-					<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</div>
+<head>
+<meta charset="UTF-8">
+<title>用户维护</title>
+<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+<script type="text/javascript" src="js/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="bootstrap/js/bootstrap.min.js"></script>
+</head>
+<body>
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<div class="navbar-brand">
+					<a href="permissions.html"
+						style="text-decoration: none; color: gray;">请假管理系统</a>
 				</div>
-				<div class="pull-right navbar-collapse collapse">
-					<div class="navbar-btn">
-						<span>您好</span><label><a href="usermain.html">管理员</a></label>
-						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
-						<a href="login.html"><button class="btn btn-danger">退出</button></a>
-					</div>
+				<div class="navbar-toggle" data-toggle="collapse"
+					data-target=".collapse">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
 				</div>
 			</div>
-		</nav>
-		<br />
-		<div class="container">
-			<form action="" method="post" class="form-inline pull-left">
-				<div class="form-group">
-					<div class="input-group">
-						<div class="input-group-addon">查询条件</div>
-						<input type="text" class="form-control" placeholder="请输入查询条件"/>
-					</div>
-					<input type="submit" class="form-control btn-warning" value="搜索"/>
+			<div class="pull-right navbar-collapse collapse">
+				<div class="navbar-btn">
+					<span>您好</span><label><a id="usernameshow" href="usermain.html">管理员</a></label> <a
+						href="usermain.html"><button class="btn text-success">个人设置</button></a>
+					<a href="login.html"><button class="btn btn-danger">退出</button></a>
 				</div>
-			</form>
-			<div class="pull-right">
-				<button class="btn btn-primary">新增</button>
-				<button class="btn btn-danger">删除</button>
 			</div>
 		</div>
-		<div class="container">
-			<div class="text-center h3">用户列表</div>
-			<table class="table table-hover table-striped">
-				<tr>
-					<td style="width: 20px;"><input type="checkbox" /></td>
-					<td>账号</td>
-					<td>用户名</td>
-					<td>上级</td>
-					<td>操作</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td>1</td>
-					<td>张三</td>
-					<td>李老板</td>
-					<td>
-						<button class="btn btn-info">编辑</button>
-						<button class="btn btn-danger">删除</button>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td>2</td>
-					<td>李四</td>
-					<td>李老板</td>
-					<td>
-						<button class="btn btn-info">编辑</button>
-						<button class="btn btn-danger">删除</button>
-					</td>
-				</tr>
-				<tr>
-					<td><input type="checkbox" /></td>
-					<td>3</td>
-					<td>王五</td>
-					<td>李老板</td>
-					<td>
-						<button class="btn btn-info">编辑</button>
-						<button class="btn btn-danger">删除</button>
-					</td>
-				</tr>
-			</table>
+	</nav>
+	<br />
+	<div class="container">
+		<form action="" method="post" class="form-inline pull-left">
+			<div class="form-group">
+				<div class="input-group">
+					<div class="input-group-addon">查询条件</div>
+					<input type="text" class="form-control" placeholder="请输入查询条件" />
+				</div>
+				<input type="submit" class="form-control btn-warning" value="搜索" />
+			</div>
+		</form>
+		<div class="pull-right">
+			<button class="btn btn-primary">新增</button>
+			<button class="btn btn-danger">删除</button>
 		</div>
-		<!--分页-->
-		<nav>
-			<ul class="pager">
-				<li><a href="#">上一页</a></li>
-				<li><a href="#">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">3</a></li>
-				<li><a href="#">4</a></li>
-				<li><a href="#">下一页</a></li>
-			</ul>
-		</nav>
-	</body>
+	</div>
+	<div class="container">
+		<div class="text-center h3">用户列表</div>
+		<table id="usertable" class="table table-hover table-striped">
+			<tr>
+				<td style="width: 20px;"><input type="checkbox" /></td>
+				<td>账号</td>
+				<td>用户名</td>
+				<td>上级</td>
+				<td>操作</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>1</td>
+				<td>张三</td>
+				<td>李老板</td>
+				<td>
+					<button class="btn btn-info">编辑</button>
+					<button class="btn btn-danger">删除</button>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>2</td>
+				<td>李四</td>
+				<td>李老板</td>
+				<td>
+					<button class="btn btn-info">编辑</button>
+					<button class="btn btn-danger">删除</button>
+				</td>
+			</tr>
+			<tr>
+				<td><input type="checkbox" /></td>
+				<td>3</td>
+				<td>王五</td>
+				<td>李老板</td>
+				<td>
+					<button class="btn btn-info">编辑</button>
+					<button class="btn btn-danger">删除</button>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<!--分页-->
+	<nav>
+		<ul class="pager">
+			<li><a href="#">上一页</a></li>
+			<li><a href="#">1</a></li>
+			<li><a href="#">2</a></li>
+			<li><a href="#">3</a></li>
+			<li><a href="#">4</a></li>
+			<li><a href="#">下一页</a></li>
+		</ul>
+	</nav>
+	<script type="text/javascript">
+			$.ajax({
+				url:"getUser",
+				success:function(data){
+					if(data.success==true){
+						$("#usernameshow").text(data.data)
+					}else{
+						alert("用户状态不存在，请重新登录");
+						window.location.href="login.html";
+					}
+				}
+			})
+			//获取第1页的数据
+			getUser(0);
+			function getUser(locationPage){
+				var table=""
+				table+="<tr>"
+				table+="	<td style='width: 20px;'><input type='checkbox' /></td>"
+				table+="	<td>账号</td>"
+				table+="	<td>用户名</td>"
+				table+="	<td>上级</td>"
+				table+="	<td>操作</td>"
+				table+="</tr>"
+				$.ajax({
+					url:"getLocationPageUser",
+					data:"locationPage="+locationPage,
+					success:function(data){
+						if(data.success){
+							var users=data.data.users;
+							var page=data.data.page;
+							for(var i=0;i<users.length;i++){
+								//展示用户
+								table+="<tr>"
+								table+="	<td><input type='checkbox' /></td>"
+								table+="	<td>"+users[i].id+"</td>"
+								table+="	<td>"+users[i].username+"</td>"
+								table+="	<td>"+users[i].userid+"</td>"
+								table+="	<td>"
+								table+="		<button class='btn btn-info'>编辑</button>"
+								table+="		<button class='btn btn-danger'>删除</button>"
+								table+="	</td>"
+								table+="</tr>"
+							}
+							$("#usertable").html(table);
+							//展示分页
+						}else{
+							alert("数据获取失败");
+						}
+					}
+					
+				})
+			}
+			
+		
+		</script>
+</body>
 </html>

@@ -1,8 +1,11 @@
 package cn.edu.pdsu.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import cn.edu.pdsu.pojo.Page;
 import cn.edu.pdsu.pojo.User;
 
 public interface UserMapper {
@@ -15,5 +18,8 @@ public interface UserMapper {
 	
 	@Select("SELECT * FROM act_user WHERE id=#{userid}")
 	public User getUserByUserid(User user);
+
+	@Select("SELECT * FROM act_user LIMIT #{locationPage},#{perSize}")
+	public List<User> getUserByLimit(Page page);
 
 }
