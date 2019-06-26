@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>修改申请</title>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+						<div class="navbar-brand">
+							<a href="permissions.html" style="text-decoration: none;color: gray;">请假管理系统</a>
+						</div>
+					<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</div>
+				<div class="pull-right navbar-collapse collapse">
+					<div class="navbar-btn">
+						<span>您好</span><label><a id="usernameshow" href="usermain.html"></a></label>
+						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
+						<button id="logout" class="btn btn-danger">退出</button>
+					</div>
+				</div>
+			</div>
+		</nav>
+		<div class="container">
+			<div class="h3 text-center">请假申请</div>
+			<div class="center-block" style="width: 300px;">
+				<form id="form" action="" method="post">
+					<div class="form-group">
+						<label>请假人</label>
+						<input id="username" class="form-control" type="text" disabled value="张三" />
+					</div>
+					<div class="form-group">
+						<label>请假时间</label>
+						<div class="row">
+							<div class="col-md-1">
+								<label>从</label>
+							</div>
+							<div class="col-md-10">
+								<input id="from" name="from_time" class="form-control" type="datetime-local"/>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-md-1">
+								<label>到</label>
+							</div>
+							<div class="col-md-10">
+								<input id="to" name="to_time" class="form-control" type="datetime-local"/>
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>请假原因</label>
+						<textarea id="cause" name="cause" class="form-control" placeholder="请假原因"></textarea>
+					</div>
+				</form>
+				<button id="submit" class="btn btn-info col-md-4">确认修改</button>
+				<button id="reset" class="btn btn-danger pull-right col-md-4">重置</button>
+			</div>
+		</div>
+	</body>
+	<script>
+		$.ajax({
+			url:"getUser",
+			success:function(data){
+				if(data.success){
+					$("#usernameshow").text(data.data);
+					$("#username").attr("value",data.data);
+				}else{
+					alert("用户状态不存在，请重新登录");
+					window.location.href="login.html";
+				}
+			}
+		})
+		//获得表单信息
+		var id = window.location.href.split("?")[1];
+// 		alert(id);
+		$.ajax({
+			url:"getTable",
+			data:id,
+			success:function(data){
+				if(data.success){
+					$("#form").append("<input name='id' type='hidden' value="+id.split("=")[1]+" />");
+					$("#from").attr("value",data.data.from_time.replace(" ","T"));
+					$("#to").attr("value",data.data.to_time.replace(" ","T"));
+					$("#cause").text(data.data.cause);
+				}else{
+					alert("查询失败");
+				}
+				
+			}
+		})
+		$("#logout").click(function(){
+			window.location.href="logout";
+		})
+		$("#reset").click(function(){
+			$("#form")[0].reset();
+		})
+		//提交修改信息
+		$("#submit").click(function(){
+			var from=$("#from").val();
+			var to=$("#to").val();
+			var cause=$("#cause").val();
+			if(from==""||from.length==0||to==""||to.length==0){
+				alert("请假时间不能为空");
+				return;
+			}
+			if(cause==""||cause.length==0){
+				alert("请假原因不能为空")
+				return;
+			}
+//			$("#form").submit();
+			$.ajax({
+				url:"edit",
+				data:$("#form").serialize(),
+				success:function(data){
+					if(data.success){
+						
+						
+						alert("修改成功");
+						window.location.href="permissions.html";
+					}else{
+						alert("修改失败，请重试");
+					}
+				}
+			})
+//			$("#from").val("2015-03-14T23:13");
+		})
+		
+	</script>
+</html>

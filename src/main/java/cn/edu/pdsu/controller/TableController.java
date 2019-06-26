@@ -155,5 +155,46 @@ public class TableController {
 		}
 		return ajaxResult;
 	}
+	/*
+	 * 获取表单信息
+	 */
+	@RequestMapping("/getTable")
+	public Object getTable(String id,HttpSession session) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			User user= (User)session.getAttribute("user");
+			Map<String, Object> map=new HashMap<>();
+			map.put("userid",user.getId());
+			map.put("id", id);
+			Table table= tableService.getTable(map);
+			ajaxResult.setData(table);
+			ajaxResult.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	/*
+	 * 修改表单信息
+	 */
+	@RequestMapping("/edit")
+	public Object edit(Table table,HttpSession session) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			Map<String, Object> map=new HashMap<>();
+			table.setFrom_time(table.getFrom_time().replace("T", " "));
+			table.setTo_time(table.getTo_time().replace("T", " "));
+			User user=(User) session.getAttribute("user");
+			map.put("table", table);
+			map.put("userid", user.getId());
+			int i= tableService.edit(map);
+			if(i==1) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
 	
 }

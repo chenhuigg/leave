@@ -54,5 +54,12 @@ public class DispatcherController {
 	public String writenote() {
 		return "writenote";
 	}
+	/*
+	 * 跳转到修改申请页
+	 */
+	@RequestMapping("/editnote.html")
+	public String editnote() {
+		return "editnote";
+	}
 	
 }

@@ -38,6 +38,7 @@ public class PremissionFilter implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		//判断Session中urls是否为空
 		//如果urls中包含，就通过
+		@SuppressWarnings("unchecked")
 		List<String> lists=(List<String>) session.getAttribute("urls");
 		if(lists!=null) {
 			for (String string : lists) {

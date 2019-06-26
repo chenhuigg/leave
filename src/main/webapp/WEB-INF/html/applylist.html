@@ -69,7 +69,8 @@
 						}
 						if(data.data[i].state==0){
 							//审核中
-							status="<button class='btn btn-danger' onclick='cancle(\""+data.data[i].id+"\")'>取消</button>";
+							status="<button class='btn btn-info' onclick='edit(\""+data.data[i].id+"\")'>编辑</button> ";
+							status+="<button class='btn btn-danger' onclick='cancle(\""+data.data[i].id+"\")'>取消</button> ";
 							teacher="审核中";
 						}
 						if(data.data[i].state==1){
@@ -115,6 +116,9 @@
 				},
 				dataType:"json"
 			})
+		}
+		function edit(temp){
+			window.location.href="editnote.html?id="+temp;
 		}
 	
 		

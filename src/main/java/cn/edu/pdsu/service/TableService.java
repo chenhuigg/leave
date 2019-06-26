@@ -39,4 +39,13 @@ public class TableService {
 		return tableMapper.updateState(map);
 	}
 
+	public Table getTable(Map<String, Object> map) {
+		return tableMapper.getTableById(map);
+	}
+
+	public int edit(Map<String, Object> map) {
+		return tableMapper.updateTableByIdAndUserId(map);
+	}
+
+
 }

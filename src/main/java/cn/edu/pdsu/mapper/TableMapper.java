@@ -26,4 +26,10 @@ public interface TableMapper {
 
 	@Update("UPDATE act_table SET state=#{state} WHERE id=#{id} AND approveid=#{approveid}")
 	int updateState(Map<String, Object> map);
+
+	@Select("SELECT * FROM act_table WHERE id=#{id} AND userid=#{userid} ")
+	Table getTableById(Map<String, Object> map);
+
+	@Update("UPDATE act_table SET from_time=#{table.from_time} , to_time=#{table.to_time} , cause=#{table.cause} WHERE id=#{table.id} AND userid=#{userid} ")
+	int updateTableByIdAndUserId(Map<String, Object> map);
 }
