@@ -6,6 +6,14 @@
 		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
 		<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
 		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			ul li{
+				padding: 6px;
+			}
+			a:hover{
+				text-decoration: none;
+			}
+		</style>
 	</head>
 	<body>
 		<nav class="navbar navbar-default">
@@ -29,10 +37,30 @@
 				</div>
 			</div>
 		</nav>
+		<div style="width: 200px;padding-left: 20px">
+			<ul class="list-group">
+				<li class="list-group-item">
+					<span class="list glyphicon glyphicon-list">请假管理</span>
+					<ul style="list-style: none;display: none;">
+						<li><a href="writenote.html">请假申请</a></li>
+						<li><a href="applylist.html">请假查询</a></li>
+						<li><a href="approvelist.html">请假审批</a></li>
+					</ul>
+				</li>
+				<li class="list-group-item">
+					<span class="list glyphicon glyphicon-list">权限管理</span>
+					<ul style="list-style: none;display: none;">
+						<li><a href="userlist.html">用户维护</a></li>
+						<li><a href="#">角色维护</a></li>
+						<li><a href="#">权限维护</a></li>
+					</ul>
+				</li>
+			</ul>
+		</div>
 		
 		<br />
 		<div id="menu" class="container" >
-		
+			
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -47,7 +75,7 @@
 				}
 			}
 		})
-		$.ajax({
+		/* $.ajax({
 			url:"menu",
 			success:function(data){
 				if(data.success==true){
@@ -60,10 +88,12 @@
 					alert("出现未知错误");
 				}
 			}
-		})
+		}) */
 		$("#logout").click(function(){
 			window.location.href="logout";
 		})
-		
+		$(".list").click(function(){
+			$(this).parent().children("ul").toggle();
+		})
 	</script>
 </html>

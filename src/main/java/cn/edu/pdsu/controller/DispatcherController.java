@@ -61,5 +61,25 @@ public class DispatcherController {
 	public String editnote() {
 		return "editnote";
 	}
-	
+	/*
+	 * 跳转到用户列表
+	 */
+	@RequestMapping("/userlist.html")
+	public String userlist() {
+		return "userlist";
+	}
+	/*
+	 * 跳转到用户编辑界面
+	 */
+	@RequestMapping("/useredit.html")
+	public String useredit() {
+		return "useredit";
+	}
+	/*
+	 * 跳转到用户添加界面
+	 */
+	@RequestMapping("/useradd.html")
+	public String useradd() {
+		return "useradd";
+	}
 }

@@ -66,7 +66,7 @@ public class PremissionFilter implements HandlerInterceptor{
 					return true;
 				}else {
 					//无权限
-					response.sendError(402,"无权访问");;
+					response.sendError(402,"无权访问");
 					return false;
 				}
 			}
