@@ -76,15 +76,15 @@ public class UserController {
 	public Object getLocationPageUser(@RequestParam(value="locationPage",defaultValue="0")int locationPage) {
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
-			
 			//获取最大数
 			int maxSize=pageService.getMaxSize();
 			//计算最大页数
-			int maxPage=(maxSize%10)==0?(maxSize%10):(maxSize%10)+1;
+			int maxPage=(maxSize%10)==0?(maxSize/10):(maxSize/10)+1;
 			Page page=new Page();
 			page.setLocationPage(locationPage);
 			page.setMaxSize(maxSize);
 			page.setMaxPage(maxPage);
+			page.setIndex(locationPage*page.getPerSize());
 			//获得用户列表
 			List<User> users= userService.getLocationPageUser(page);
 			Map<String, Object> map=new HashMap<>();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.pdsu.mapper.UserMapper">
+	<resultMap type="cn.edu.pdsu.pojo.User" id="user">
+		<result column="rolename" property="role.rolename"/>
+	</resultMap>
+	<select id="getUserByLimit" parameterType="cn.edu.pdsu.pojo.Page" resultMap="user">
+		SELECT *,rolename 
+		FROM act_user 
+		INNER JOIN act_role 
+		WHERE act_user.roleid=act_role.id 
+		LIMIT #{index},#{perSize}
+	</select>
+
+</mapper>

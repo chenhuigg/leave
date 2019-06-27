@@ -19,7 +19,7 @@ public interface UserMapper {
 	@Select("SELECT * FROM act_user WHERE id=#{userid}")
 	public User getUserByUserid(User user);
 
-	@Select("SELECT * FROM act_user LIMIT #{locationPage},#{perSize}")
+	//@Select("SELECT *,r.rolename FROM act_user INNER JOIN act_role r LIMIT #{locationPage},#{perSize}")
 	public List<User> getUserByLimit(Page page);
-
+	
 }

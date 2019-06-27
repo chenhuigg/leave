@@ -113,13 +113,14 @@
 			})
 			//获取第1页的数据
 			getUser(0);
+			
 			function getUser(locationPage){
 				var table=""
 				table+="<tr>"
 				table+="	<td style='width: 20px;'><input type='checkbox' /></td>"
 				table+="	<td>账号</td>"
 				table+="	<td>用户名</td>"
-				table+="	<td>上级</td>"
+				table+="	<td>角色</td>"
 				table+="	<td>操作</td>"
 				table+="</tr>"
 				$.ajax({
@@ -135,7 +136,7 @@
 								table+="	<td><input type='checkbox' /></td>"
 								table+="	<td>"+users[i].id+"</td>"
 								table+="	<td>"+users[i].username+"</td>"
-								table+="	<td>"+users[i].userid+"</td>"
+								table+="	<td>"+users[i].role.rolename+"</td>"
 								table+="	<td>"
 								table+="		<button class='btn btn-info'>编辑</button>"
 								table+="		<button class='btn btn-danger'>删除</button>"
@@ -144,6 +145,34 @@
 							}
 							$("#usertable").html(table);
 							//展示分页
+							var pager="";
+							for(var i=0;i<=page.maxPage;i++){
+								if(i==0){
+									if(i==page.locationPage){
+										pager+="<li class='disabled'><a href='#'>上一页</a></li>"
+										pager+="<li class='disabled'><a href='#'>"+(i+1)+"</a></li>"
+									}else{
+										pager+="<li><a onclick=getUser("+i+")>上一页</a></li>"
+										pager+="<li><a onclick=getUser("+i+") href='#'>"+(i+1)+"</a></li>"
+									}
+								}else if(i==page.maxPage){
+									if(i==page.locationPage){
+										pager+="<li class='disabled'><a href='#'>"+(i+1)+"</a></li>"
+										pager+="<li class='disabled'><a href='#'>下一页</a></li>"
+									}else{
+										pager+="<li><a href='#' onclick=getUser("+i+")>"+(i+1)+"</a></li>"
+										pager+="<li><a href='#' onclick=getUser("+i+")>下一页</a></li>"
+									}
+								}else{
+									if(i!=page.locationPage){
+										pager+="<li><a href='#' onclick=getUser("+i+")>"+(i+1)+"</a></li>"
+									}else{
+										pager+="<li class='disabled'><a href='#'>"+(i+1)+"</a></li>"
+									}
+								}
+								
+							}
+							$(".pager").html(pager);
 						}else{
 							alert("数据获取失败");
 						}
