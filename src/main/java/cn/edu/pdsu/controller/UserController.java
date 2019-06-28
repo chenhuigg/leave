@@ -1,5 +1,7 @@
 package cn.edu.pdsu.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -97,5 +99,100 @@ public class UserController {
 		}
 		return ajaxResult;
 	}
-
+	
+	/*
+	 * 新增用户
+	 */
+	@RequestMapping("/addUser")
+	public Object adduser(User user) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			//默认角色(学生)
+			if(user.getRoleid()==null||user.getRoleid()=="") {
+				user.setRoleid("1");
+			}
+			//默认管理者-1
+			if(user.getUserid()==null||user.getUserid()=="") {
+				user.setUserid("-1");
+			}
+			user.setPassword("123");
+			user.setTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+			int i= userService.addUser(user);
+			if(i==1) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	
+	@RequestMapping("/delUser")
+	public Object delUser(String id) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			int i=userService.delUser(id);
+			if(i==1) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	
+	/*
+	 * 删除多个用户
+	 */
+	@RequestMapping("/delUsers")
+	public Object delUsers(String[] id) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			int i=userService.delUsers(id);
+			if(i>0) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	
+	/*
+	 * 通过ID获取用户信息
+	 */
+	@RequestMapping("/getUserById")
+	public Object getUserById(String id) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			User user=new User();
+			user.setUserid(id);
+			user = userService.getUserByUserid(user);
+			if(user!=null) {
+				ajaxResult.setData(user);
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	/*
+	 * 修改用户
+	 */
+	@RequestMapping("/editsave")
+	public Object editsave(User user) {
+		System.out.println(user.getId());
+		System.out.println(user.getUsername());
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			int i= userService.editsave(user);
+			if(i==1) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
 }

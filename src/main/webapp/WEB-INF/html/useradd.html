@@ -22,7 +22,7 @@
 				</div>
 				<div class="pull-right navbar-collapse collapse">
 					<div class="navbar-btn">
-						<span>您好</span><label><a href="usermain.html">管理员</a></label>
+						<span>您好</span><label><a id="usernameshow" href="usermain.html">管理员</a></label>
 						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
 						<a href="login.html"><button class="btn btn-danger">退出</button></a>
 					</div>
@@ -33,19 +33,81 @@
 		<div class="container">
 			<div class="center-block" style="width: 300px;">
 				<div class="text-center h3" >新增用户</div>
-				<form  action="" method="post">
+				<form id="form" action="" method="post">
 					<div class="form-group">
 						<label>账号</label>
-						<input class="form-control" type="用户名" />
+						<input name="id" class="form-control" type="用户名" />
 					</div>
 					<div class="form-group">
 						<label>用户名 </label>
-						<input class="form-control" type="用户名" />
+						<input name="username" class="form-control" type="用户名" />
+					</div>
+					<div class="form-group">
+						<label>角色 </label>
+						<select name="roleid" id="role" class="form-control" >
+							<option name="">请选择角色</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>上级id</label>
+						<input name="userid" class="form-control" type="用户名" />
 					</div>
 				</form>
-				<button class="btn btn-success btn-block">新增</button>
+				<button class="btn btn-success btn-block" id="add">新增</button>
 			</div>
 		</div>
-		
+		<script type="text/javascript">
+			$.ajax({
+				url:"getUser",
+				success:function(data){
+					if(data.success){
+						$("#usernameshow").text(data.data);
+					}else{
+						alert("用户状态不存在，请重新登录");
+						window.location.href="login.html";
+					}
+				}
+			})
+			$.ajax({
+				url:"getAllRole",
+				success:function(data){
+					var rolelist="<option name='roleid' value='3'}>请选择角色</option>"
+					if(data.success){
+						for(var i=0;i<data.data.length;i++){
+							rolelist+="<option name='roleid' value='"+data.data[i].id+"'>"+data.data[i].rolename+"</option>";
+						}
+						$("#role").html(rolelist)
+					}else{
+			 			alert("请求失败");
+					}
+				}
+			})
+			$("#add").click(function(){
+				var id=$("#id").val();
+				var username=$("#username").val();
+				var roleid=$("#roleid").val();
+				var userid=$("#userid").val();
+				if(id==""){
+					alert("账号不能为空")
+					return;
+				}
+				if(username==""){
+					alert("用户名不能为空")
+					return;
+				}
+				$.ajax({
+					url:"addUser",
+					data:$("#form").serialize(),
+					success:function(data){
+						if(data.success){
+							window.location.href="userlist.html";
+						}else{
+							alert("提交失败");
+						}
+					}
+				})
+			})
+			
+		</script>
 	</body>
 </html>

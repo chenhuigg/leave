@@ -27,6 +27,23 @@ public class UserService {
 	public List<User> getLocationPageUser(Page page) {
 		return userMapper.getUserByLimit(page);
 	}
-	
+
+	public int addUser(User user) {
+		return userMapper.addUser(user);
+	}
+
+	public int delUser(String id) {
+		return userMapper.delUserById(id);
+	}
+
+	public int delUsers(String[] id) {
+		return userMapper.delUsers(id);
+	}
+
+	public int editsave(User user) {
+		
+		return userMapper.updateUser(user);
+	}
+
 
 }

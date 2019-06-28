@@ -42,61 +42,22 @@
 			</div>
 		</form>
 		<div class="pull-right">
-			<button class="btn btn-primary">新增</button>
-			<button class="btn btn-danger">删除</button>
+			<button class="btn btn-primary" onclick="adduser()">新增</button>
+			<button class="btn btn-danger" onclick="deleteusers()">删除</button>
 		</div>
 	</div>
-	<div class="container">
-		<div class="text-center h3">用户列表</div>
-		<table id="usertable" class="table table-hover table-striped">
-			<tr>
-				<td style="width: 20px;"><input type="checkbox" /></td>
-				<td>账号</td>
-				<td>用户名</td>
-				<td>上级</td>
-				<td>操作</td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" /></td>
-				<td>1</td>
-				<td>张三</td>
-				<td>李老板</td>
-				<td>
-					<button class="btn btn-info">编辑</button>
-					<button class="btn btn-danger">删除</button>
-				</td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" /></td>
-				<td>2</td>
-				<td>李四</td>
-				<td>李老板</td>
-				<td>
-					<button class="btn btn-info">编辑</button>
-					<button class="btn btn-danger">删除</button>
-				</td>
-			</tr>
-			<tr>
-				<td><input type="checkbox" /></td>
-				<td>3</td>
-				<td>王五</td>
-				<td>李老板</td>
-				<td>
-					<button class="btn btn-info">编辑</button>
-					<button class="btn btn-danger">删除</button>
-				</td>
-			</tr>
-		</table>
-	</div>
+	<form id="userform" action="" method="post">
+		<div class="container">
+			<div class="text-center h3">用户列表</div>
+			<table id="usertable" class="table table-hover table-striped">
+				
+			</table>
+		</div>
+	</form>
 	<!--分页-->
 	<nav>
 		<ul class="pager">
-			<li><a href="#">上一页</a></li>
-			<li><a href="#">1</a></li>
-			<li><a href="#">2</a></li>
-			<li><a href="#">3</a></li>
-			<li><a href="#">4</a></li>
-			<li><a href="#">下一页</a></li>
+			
 		</ul>
 	</nav>
 	<script type="text/javascript">
@@ -113,11 +74,10 @@
 			})
 			//获取第1页的数据
 			getUser(0);
-			
 			function getUser(locationPage){
 				var table=""
 				table+="<tr>"
-				table+="	<td style='width: 20px;'><input type='checkbox' /></td>"
+				table+="	<td style='width: 20px;'><input id='check' onclick='mycheck()' type='checkbox' /></td>"
 				table+="	<td>账号</td>"
 				table+="	<td>用户名</td>"
 				table+="	<td>角色</td>"
@@ -132,14 +92,14 @@
 							var page=data.data.page;
 							for(var i=0;i<users.length;i++){
 								//展示用户
-								table+="<tr>"
-								table+="	<td><input type='checkbox' /></td>"
+								table+="<tr id="+users[i].id+">"
+								table+="	<td><input name='id' value='"+users[i].id+"' type='checkbox' /></td>"
 								table+="	<td>"+users[i].id+"</td>"
 								table+="	<td>"+users[i].username+"</td>"
 								table+="	<td>"+users[i].role.rolename+"</td>"
 								table+="	<td>"
-								table+="		<button class='btn btn-info'>编辑</button>"
-								table+="		<button class='btn btn-danger'>删除</button>"
+								table+="		<a class='btn btn-info' href='useredit.html?id="+users[i].id+"' >编辑</a>"
+								table+="		<div class='btn btn-danger' onclick='deleteuser(\""+users[i].id+"\")'>删除</div>"
 								table+="	</td>"
 								table+="</tr>"
 							}
@@ -152,7 +112,7 @@
 										pager+="<li class='disabled'><a href='#'>上一页</a></li>"
 										pager+="<li class='disabled'><a href='#'>"+(i+1)+"</a></li>"
 									}else{
-										pager+="<li><a onclick=getUser("+i+")>上一页</a></li>"
+										pager+="<li><a onclick=getUser("+(page.locationPage-1)+")>上一页</a></li>"
 										pager+="<li><a onclick=getUser("+i+") href='#'>"+(i+1)+"</a></li>"
 									}
 								}else if(i==page.maxPage){
@@ -161,7 +121,7 @@
 										pager+="<li class='disabled'><a href='#'>下一页</a></li>"
 									}else{
 										pager+="<li><a href='#' onclick=getUser("+i+")>"+(i+1)+"</a></li>"
-										pager+="<li><a href='#' onclick=getUser("+i+")>下一页</a></li>"
+										pager+="<li><a href='#' onclick=getUser("+(page.locationPage+1)+")>下一页</a></li>"
 									}
 								}else{
 									if(i!=page.locationPage){
@@ -170,14 +130,46 @@
 										pager+="<li class='disabled'><a href='#'>"+(i+1)+"</a></li>"
 									}
 								}
-								
 							}
 							$(".pager").html(pager);
 						}else{
 							alert("数据获取失败");
 						}
 					}
-					
+				})
+			}
+			function adduser(){
+				window.location.href="useradd.html";
+			}
+			//多选
+			function mycheck(){
+				$("input[type='checkbox']").prop("checked",$("#check").prop("checked"));
+			}
+			//多选删除
+			function deleteusers(){
+				$.ajax({
+					url:"delUsers",
+					data:$("#userform").serialize(),
+					success:function(data){
+						if(data.success){
+							getUser(0);
+						}else{
+							alert("删除失败")
+						}
+					}
+				})
+			} 
+			function deleteuser(temp){
+				$.ajax({
+					url:"delUser",
+					data:"id="+temp,
+					success:function(data){
+						if(data.success){
+							getUser(0);
+						}else{
+							alert("删除失败");
+						}
+					}
 				})
 			}
 			

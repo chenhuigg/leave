@@ -22,7 +22,7 @@
 				</div>
 				<div class="pull-right navbar-collapse collapse">
 					<div class="navbar-btn">
-						<span>您好</span><label><a href="usermain.html">管理员</a></label>
+						<span>您好</span><label><a id="usernameshow" href="usermain.html">管理员</a></label>
 						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
 						<a href="login.html"><button class="btn btn-danger">退出</button></a>
 					</div>
@@ -33,24 +33,97 @@
 		<div class="container">
 			<div class="center-block" style="width: 300px;">
 				<div class="text-center h3" >编辑用户信息</div>
-				<form  action="" method="post">
+				<form id="form" action="" method="post">
 					<div class="form-group">
 						<label>账号</label>
-						<input class="form-control" type="用户名" />
+						<input id="id" name="id" class="form-control disabled" type="text" />
 					</div>
 					<div class="form-group">
-						<label>用户名 </label>
-						<input class="form-control" type="用户名" />
+						<label>用户名</label>
+						<input id="username" name="username" class="form-control" type="text" />
 					</div>
 					<div class="form-group">
 						<label>密码 </label>
-						<input class="form-control" type="用户名" />
+						<input id="password" name="password" class="form-control" type="text" />
+					</div>
+					<div class="form-group">
+						<label>角色 </label>
+						<select name="roleid" id="role" class="form-control" >
+							<option name="">请选择角色</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>上级id</label>
+						<input id="userid" name="userid" class="form-control" type="text" />
 					</div>
 				</form>
-				<button class="btn btn-success">确认修改</button>
-				<button class="btn btn-danger pull-right">重置</button>
+				<button id="editsave" class="btn btn-success">确认修改</button>
+				<button id="reset" class="btn btn-danger pull-right">重置</button>
 			</div>
 		</div>
-		
+		<script type="text/javascript">
+			$.ajax({
+				url:"getUser",
+				success:function(data){
+					if(data.success){
+						$("#usernameshow").text(data.data);
+						$("#username").attr("value",data.data);
+					}else{
+						alert("用户状态不存在，请重新登录");
+						window.location.href="login.html";
+					}
+				}
+			})
+			//显示角色
+			$.ajax({
+				url:"getAllRole",
+				success:function(data){
+					var rolelist="<option name='roleid' value='0'>请选择角色</option>"
+					if(data.success){
+						for(var i=0;i<data.data.length;i++){
+							rolelist+="<option name='roleid' value='"+data.data[i].id+"'>"+data.data[i].rolename+"</option>";
+						}
+						$("#role").html(rolelist)
+					}else{
+			 			alert("请求失败");
+					}
+				}
+			})
+			var id=window.location.href.split("?")[1];
+			$.ajax({
+				url:"getUserById",
+				data:id,
+				success:function(data){
+					if(data.success){
+						$("#id").attr("value",data.data.id);
+						$("#username").attr("value",data.data.username);
+						$("#password").attr("value",data.data.password);
+						$("#role").val(data.data.roleid)
+						$("#userid").attr("value",data.data.userid);
+					}else{
+						alert("数据读取失败");
+					}
+				}
+			})
+			$("#reset").click(function(){
+				$("#form")[0].reset();
+			})
+			$("#editsave").click(function(){
+				$.ajax({
+					url:"editsave",
+					data:$("#form").serialize(),
+					success:function(data){
+						if(data.success){
+							alert("修改成功");
+							window.location.href="userlist.html";
+						}else{
+							alert($("#form").serialize());
+							alert("修改失败");
+						}
+					}
+					
+				})
+			})
+		</script>
 	</body>
 </html>
