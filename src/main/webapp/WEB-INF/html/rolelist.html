@@ -65,12 +65,12 @@
 							temp+="</tr>"
 						var roles=data.data;
 						for(var i=0;i<roles.length;i++){
-							temp+="<tr>"
+							temp+="<tr id='"+roles[i].id+"'>"
 							temp+="	<td>"+roles[i].id+"</td>"
 							temp+="	<td>"+roles[i].rolename+"</td>"
 							temp+="	<td>"
 							temp+="		<div class='btn btn-info'>编辑</div>"
-							temp+="		<div class='btn btn-danger'>删除</div>"
+							temp+="		<div class='btn btn-danger' onclick='delrole(\""+roles[i].id+"\")'>删除</div>"
 							temp+="	</td>"
 							temp+="</tr>"
 						}
@@ -80,7 +80,19 @@
 					}
 				}
 			})
-			
+			function delrole(temp){
+				 $.ajax({
+					url:"delrole",
+					data:"id="+temp,
+					success:function(data){
+						if(data.success){
+							$("#"+temp).remove();
+						}else{
+							alert("删除失败");
+						}
+					}
+				})
+			}
 		</script>
 	</body>
 </html>

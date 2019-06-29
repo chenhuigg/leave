@@ -51,5 +51,21 @@ public class RoleController {
 		}
 		return ajaxResult;
 	}
+	/*
+	 * 删除角色
+	 */
+	@RequestMapping("/delrole")
+	public Object delRole(String id) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			int i= roleService.delRole(id);
+			if(i==1) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
 
 }

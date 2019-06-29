@@ -20,6 +20,10 @@ public class RoleService {
 	public int roleAdd(Role role) {
 		return roleMapper.insertRole(role);
 	}
+
+	public int delRole(String id) {
+		return roleMapper.delRoleById(id);
+	}
 	
 	
 
