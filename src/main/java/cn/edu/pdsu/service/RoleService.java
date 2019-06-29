@@ -24,6 +24,10 @@ public class RoleService {
 	public int delRole(String id) {
 		return roleMapper.delRoleById(id);
 	}
+
+	public Role getRoleById(String id) {
+		return roleMapper.getRoleById(id);
+	}
 	
 	
 

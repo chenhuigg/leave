@@ -15,6 +15,11 @@ public class Premission {
 	}
 	private Set<Menu> menus=new HashSet<>();
 	private Set<Link> links=new HashSet<>();
+	@Override
+	public boolean equals(Object obj) {
+		Premission premission=(Premission) obj;
+		return this.id.equals(premission.id);
+	}
 	public Set<Menu> getMenus() {
 		return menus;
 	}

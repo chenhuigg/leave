@@ -20,5 +20,8 @@ public interface RoleMapper {
 
 	@Delete("DELETE FROM act_role WHERE id=#{id} ")
 	public int delRoleById(String id);
+
+	@Select("SELECT * FROM act_role WHERE id=#{id}")
+	public Role getRoleById(String id);
 	
 }

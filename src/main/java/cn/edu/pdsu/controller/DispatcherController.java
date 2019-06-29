@@ -96,4 +96,11 @@ public class DispatcherController {
 	public String roleadd() {
 		return "roleadd";
 	}
+	/*
+	 * 跳转到角色分配权限界面
+	 */
+	@RequestMapping("/assignpermissions.html")
+	public String assignPermissions() {
+		return "assignpermissions";
+	}
 }
