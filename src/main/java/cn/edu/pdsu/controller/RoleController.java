@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.pdsu.pojo.AjaxResult;
 import cn.edu.pdsu.pojo.Role;
+import cn.edu.pdsu.service.RoleService;
 
 @RestController
 public class RoleController {
