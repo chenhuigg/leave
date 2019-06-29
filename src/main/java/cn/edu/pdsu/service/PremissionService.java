@@ -1,6 +1,7 @@
 package cn.edu.pdsu.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +52,14 @@ public class PremissionService {
 	 */
 	public List<Premission> getHadPremissionByPermissionId(String id) {
 		return premissionMapper.getPremissionById(id);
+	}
+
+	public int addPremissions(Map<String, Object> map) {
+		return premissionMapper.addPremissions(map);
+	}
+
+	public int delPremissions(Map<String, Object> map) {
+		return premissionMapper.delPremissions(map);
 	}
 
 	

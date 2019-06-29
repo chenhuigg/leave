@@ -37,30 +37,34 @@
 				<!--左边角色-->
 				<div  class="col-md-5">
 					<label>未分配权限</label>
-					<select id="un" multiple="multiple" style="overflow-y: auto;" class="form-control">
-						<option>教务处</option>
-						<option>教师</option>
-						<option>班长</option>
-						<option>学生</option>
-					</select>
+					<form id="leftform">
+						<select id="un" name="ids" multiple="multiple" style="overflow-y: auto;" class="form-control">
+							<option>教务处</option>
+							<option>教师</option>
+							<option>班长</option>
+							<option>学生</option>
+						</select>
+					</form>
 				</div>
 				<!--中间移动-->
 				<div class="col-md-2">
 					<div style="margin-top: 30px;margin-left: 40%;">
-						<div class="btn btn-default">&lt;</div>
+						<div id="del" class="btn btn-default">&lt;</div>
 						<br /><br />
-						<div class="btn btn-default">&gt;</div>
+						<div id="add" class="btn btn-default">&gt;</div>
 					</div>
 				</div>
 				<!--右边权限-->
 				<div class="col-md-5">
 					<label>已有权限</label>
-					<select id="had" multiple="multiple" style="overflow-y: auto;" class="form-control">
-						<option>教务处</option>
-						<option>教师</option>
-						<option>班长</option>
-						<option>学生</option>
-					</select>
+					<form id="rightform">
+						<select name="ids" id="had" multiple="multiple" style="overflow-y: auto;" class="form-control">
+							<option>教务处</option>
+							<option>教师</option>
+							<option>班长</option>
+							<option>学生</option>
+						</select>
+					</form>
 				</div>
 			</div>
 		</div>
@@ -77,20 +81,48 @@
 						var un="";
 						$("#rolename").text(role.rolename);
 						for(var i=0;i<unPremissions.length;i++){
-							un+="<option>"+unPremissions[i].name+"</option>";
+							un+="<option value='"+unPremissions[i].id+"'>"+unPremissions[i].name+"</option>";
 						}
 						$("#un").html(un);
 						var had="";
 						for(var i=0;i<hadPremissions.length;i++){
-							had+="<option>"+hadPremissions[i].name+"</option>";
+							had+="<option value='"+hadPremissions[i].id+"'>"+hadPremissions[i].name+"</option>";
 						}
 						$("#had").html(had);
 					}else{
 						
 					}
 				}
-				
 			})
+			//添加权限
+			$("#add").click(function(){
+				$.ajax({
+					url:"addPremission",
+					data:id+"&"+$("#leftform").serialize(),
+					success:function(data){
+						if(data.success){
+							$("#had").append($("#un :selected"))
+						}else{
+							alert("分配权限失败");
+						}
+					}
+				})
+			})
+			//删除权限
+			$("#del").click(function(){
+				$.ajax({
+					url:"delPremission",
+					data:id+"&"+$("#rightform").serialize(),
+					success:function(data){
+						if(data.success){
+							$("#un").append($("#had :selected"))
+						}else{
+							alert("分配权限失败");
+						}
+					}
+				})
+			})
+			
 		</script>
 	</body>
 </html>

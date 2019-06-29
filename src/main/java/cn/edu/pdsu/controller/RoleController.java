@@ -114,10 +114,40 @@ public class RoleController {
 	 * 添加权限
 	 */
 	@RequestMapping("/addPremission")
-	public Object addPremission() {
+	public Object addPremission(String [] ids,String id) {
 		AjaxResult ajaxResult=new AjaxResult();
-		
-		
+		try {
+			Map<String, Object> map=new HashMap<>();
+			map.put("ids", ids);
+			map.put("roleid", id);
+			//添加权限
+			int i=premissionService.addPremissions(map);
+			if(i>0) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	/*
+	 * 删除权限
+	 */
+	@RequestMapping("/delPremission")
+	public Object delPremission(String [] ids,String id) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			Map<String, Object> map=new HashMap<>();
+			map.put("ids", ids);
+			map.put("roleid", id);
+			//删除权限
+			int i=premissionService.delPremissions(map);
+			if(i>0) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return ajaxResult;
 	}
 

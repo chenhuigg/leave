@@ -1,6 +1,7 @@
 package cn.edu.pdsu.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Select;
 
@@ -16,5 +17,9 @@ public interface PremissionMapper {
 			"ON p.id=r_p.premissionid " + 
 			"WHERE r_p.roleid=#{id}")
 	List<Premission> getPremissionById(String id);
+
+	int addPremissions(Map<String, Object> map);
+
+	int delPremissions(Map<String, Object> map);
 
 }
