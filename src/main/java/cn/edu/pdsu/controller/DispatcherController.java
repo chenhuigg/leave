@@ -82,4 +82,18 @@ public class DispatcherController {
 	public String useradd() {
 		return "useradd";
 	}
+	/*
+	 * 跳转到角色列表
+	 */
+	@RequestMapping("/rolelist.html")
+	public String rolelist() {
+		return "rolelist";
+	}
+	/*
+	 * 跳转到新增角色
+	 */
+	@RequestMapping("/roleadd.html")
+	public String roleadd() {
+		return "roleadd";
+	}
 }

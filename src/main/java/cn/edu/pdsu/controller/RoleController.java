@@ -1,6 +1,9 @@
 package cn.edu.pdsu.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,24 @@ public class RoleController {
 			List<Role> role = roleService.getAllRole();
 			ajaxResult.setData(role);
 			ajaxResult.setSuccess(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	/*
+	 * 新增角色
+	 */
+	@RequestMapping("/roleadd")
+	public Object roleAdd(Role role) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			role.setId(UUID.randomUUID().toString());
+			role.setTime(new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(new Date()));
+			int i=roleService.roleAdd(role);
+			if(i==1) {
+				ajaxResult.setSuccess(true);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

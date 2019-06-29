@@ -6,6 +6,7 @@ import java.util.Set;
 public class Role {
 	private String id;
 	private String rolename;
+	private String time;
 	private Set<Premission> premissions=new HashSet<>();
 	public String getId() {
 		return id;
@@ -28,4 +29,11 @@ public class Role {
 	public void setPremissions(Set<Premission> premissions) {
 		this.premissions = premissions;
 	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	
 }

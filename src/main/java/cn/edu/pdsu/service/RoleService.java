@@ -16,6 +16,10 @@ public class RoleService {
 	public List<Role> getAllRole() {
 		return roleMapper.getAllRole();
 	}
+
+	public int roleAdd(Role role) {
+		return roleMapper.insertRole(role);
+	}
 	
 	
 

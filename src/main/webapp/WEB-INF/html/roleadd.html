@@ -33,14 +33,36 @@
 		<!--增加角色-->
 		<div class="container" style="width: 300px;">
 			<h3 class="text-center">新增角色</h3>
-			<form >
+			<form method="post">
 				<div class="form-group">
 					<label>角色名称</label>
-					<input type="text" class="form-control" />
+					<input id="rolename" name="rolename" type="text" class="form-control" />
 				</div>
 			</form>
+			<button id="submit" class="btn btn-success btn-block">新增角色</button>
 			<br />
-			<button class="btn btn-success btn-block">新增角色</button>
 		</div>
+		<script type="text/javascript">
+			$("#submit").click(function(){
+				var rolename=$("#rolename").val();
+				if(rolename.length==0||rolename==""){
+					alert("角色名称不能为空");
+					return;
+				}
+				$.ajax({
+					url:"roleadd",
+					data:"rolename="+rolename,
+					success:function(data){
+						if(data.success){
+							alert("添加成功");
+							window.location.href="rolelist.html";
+						}else{
+							alert("添加失败");
+						}
+					}
+				})
+			})
+		
+		</script>
 	</body>
 </html>
