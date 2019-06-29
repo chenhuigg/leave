@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>分配权限</title>
+	</head>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+						<div class="navbar-brand">
+							<a href="permissions.html" style="text-decoration: none;color: gray;">请假管理系统</a>
+						</div>
+					<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</div>
+				<div class="pull-right navbar-collapse collapse">
+					<div class="navbar-btn">
+						<span>您好</span><label><a href="usermain.html">管理员</a></label>
+						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
+						<a href="login.html"><button class="btn btn-danger">退出</button></a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<!--分配权限-->
+		<div class="container">
+			<div class="row">
+				<!--左边角色-->
+				<div class="col-md-5">
+					<label>全部权限</label>
+					<select multiple="multiple" style="overflow-y: auto;" class="form-control">
+						<option>教务处</option>
+						<option>教师</option>
+						<option>班长</option>
+						<option>学生</option>
+					</select>
+				</div>
+				<!--中间移动-->
+				<div class="col-md-2">
+					<div style="margin-top: 30px;margin-left: 40%;">
+						<div class="btn btn-default">&lt;</div>
+						<br /><br />
+						<div class="btn btn-default">&gt;</div>
+					</div>
+				</div>
+				<!--右边权限-->
+				<div class="col-md-5">
+					<label>已有权限</label>
+					<select multiple="multiple" style="overflow-y: auto;" class="form-control">
+						<option>教务处</option>
+						<option>教师</option>
+						<option>班长</option>
+						<option>学生</option>
+					</select>
+				</div>
+			</div>
+		</div>
+		
+		
+	</body>
+</html>

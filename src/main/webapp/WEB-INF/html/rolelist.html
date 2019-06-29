@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>角色列表</title>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+						<div class="navbar-brand">
+							<a href="permissions.html" style="text-decoration: none;color: gray;">请假管理系统</a>
+						</div>
+					<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</div>
+				<div class="pull-right navbar-collapse collapse">
+					<div class="navbar-btn">
+						<span>您好</span><label><a href="usermain.html">管理员</a></label>
+						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
+						<a href="login.html"><button class="btn btn-danger">退出</button></a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<!--角色列表-->
+		<div class="container">
+			<div class="btn btn-primary pull-right">新增角色</div>
+			<h3 class="text-center">角色列表</h3>
+			<table class="table table-hover table-striped">
+				<tr>
+					<th>编号</th>
+					<th>角色名称</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>管理员</td>
+					<td>
+						<div class="btn btn-info">编辑</div>
+						<div class="btn btn-danger">删除</div>
+					</td>
+				</tr>
+				
+			</table>
+		</div>
+		<script>
+			/*获取所有角色信息并显示*/
+			
+			
+		</script>
+	</body>
+</html>
