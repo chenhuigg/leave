@@ -11,7 +11,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		FROM act_user 
 		INNER JOIN act_role 
 		WHERE act_user.roleid=act_role.id 
-		ORDER BY time DESC
+		ORDER BY act_user.time DESC
 		LIMIT #{index},#{perSize}
 	</select>
 	
