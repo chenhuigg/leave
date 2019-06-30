@@ -113,8 +113,8 @@ public class RoleController {
 	/*
 	 * 添加权限
 	 */
-	@RequestMapping("/addPermission")
-	public Object addPermission(String [] ids,String id) {
+	@RequestMapping("/addPermissions")
+	public Object addPermissions(String [] ids,String id) {
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
 			Map<String, Object> map=new HashMap<>();

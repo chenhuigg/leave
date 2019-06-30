@@ -32,23 +32,51 @@
 		
 		<div class="container">
 			<h3 class="text-center">添加权限</h3>
-			<form style="width: 300px;" class="center-block">
-				<input type="hidden" id="" name="" value="1" /><br />
+			<form id="form" style="width: 300px;" class="center-block">
 				<label>权限名称</label>
-				<input class="form-control" id="" name="" type="text" /><br />
+				<input class="form-control" id="name" name="name" type="text" /><br />
 				<label>权限类别</label>
-				<select name="type" class="form-control">
+				<select id="type" name="type" class="form-control">
 					<option value="0">菜单</option>
 					<option value="1">链接</option>
 				</select><br />
 				<label>增加权限</label>
-				<textarea style="overflow-y:auto;height: 130px;" class="form-control" id="" name="" >
-					
-				</textarea><br />
-				<button class="btn-block btn btn-success">增加权限</button>
+				<textarea style="overflow-y:auto;height: 130px;" class="form-control" id="value" name="value" ></textarea><br />
+				<div id="add" class="btn-block btn btn-success">增加权限</div>
 			</form>
 		</div>
-		
-		
+		<script type="text/javascript">
+			/* 增加权限 */
+			$("#add").click(function(){
+				var name=$("#name").val();
+				var type=$("#type").val();
+				var value=$("#value").val();
+				if(name==null||name==""){
+					alert("权限名称不能为空");
+					return;
+				}
+				if(type==null||type==""){
+					alert("权限类型不能为空");
+					return;
+				}
+				if(value==null||value==""){
+					alert("权限信息不能为空");
+					return;
+				}
+				$.ajax({
+					url:"addPermission",
+					data:$("#form").serialize(),
+					success:function(data){
+						if(data.success){
+							alert("增加权限成功");
+							window.location.href="permissionlist.html";
+						}else{
+							alert("增加权限失败");
+						}
+					}
+					
+				})
+			})
+		</script>
 	</body>
 </html>

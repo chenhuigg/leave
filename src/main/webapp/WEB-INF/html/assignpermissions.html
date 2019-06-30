@@ -97,7 +97,7 @@
 			//添加权限
 			$("#add").click(function(){
 				$.ajax({
-					url:"addPermission",
+					url:"addPermissions",
 					data:id+"&"+$("#leftform").serialize(),
 					success:function(data){
 						if(data.success){

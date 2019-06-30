@@ -3,13 +3,17 @@ package cn.edu.pdsu.mapper;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 
+import cn.edu.pdsu.pojo.Link;
+import cn.edu.pdsu.pojo.Menu;
 import cn.edu.pdsu.pojo.Permission;
 
 public interface PermissionMapper {
 
-	@Select("SELECT * FROM act_permission")
+	@Select("SELECT * FROM act_permission ORDER BY time DESC")
 	List<Permission> getAllPermission();
 
 	@Select("SELECT * FROM act_permission p " + 
@@ -21,5 +25,20 @@ public interface PermissionMapper {
 	int addPermissions(Map<String, Object> map);
 
 	int delPermissions(Map<String, Object> map);
+
+	@Insert("INSERT INTO act_permission(id,name,type,time) VALUES(#{id},#{name},#{type},#{time}) ")
+	int addPermission(Permission permission);
+
+	@Insert("INSERT INTO act_menu(id,html) VALUES(#{id},#{html}) ")
+	void addMenu(Menu menu);
+
+	@Insert("INSERT INTO act_p_m(p_id,m_id) VALUES(#{p_id},#{m_id})")
+	void addAct_p_m(@Param("p_id")String id,@Param("m_id") String id2);
+
+	@Insert("INSERT INTO act_link(id,link) VALUES(#{id},#{link})")
+	void addLink(Link link);
+
+	@Insert("INSERT INTO act_p_l(p_id,l_id) VALUES(#{p_id},#{l_id})")
+	void addAct_p_l(@Param("p_id")String id,@Param("l_id") String id2);
 
 }

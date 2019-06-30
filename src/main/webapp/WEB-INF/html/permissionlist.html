@@ -32,9 +32,9 @@
 		
 		<!--权限列表-->
 		<div class="container">
-			<div class="btn btn-primary pull-right">新增权限</div>
+			<a class="btn btn-primary pull-right" href="permissionadd.html">新增权限</a>
 			<div class="h3 text-center">权限列表</div>
-			<table class="table table-hover table-striped">
+			<table id="table" class="table table-hover table-striped">
 				<tr>
 					<th>ID</th>
 					<th>名称</th>
@@ -61,7 +61,42 @@
 				</tr>
 			</table>
 		</div>
+		<script type="text/javascript">
+			$.ajax({
+				url:"getPermissionList",
+				success:function(data){
+					if(data.success){
+						var temp=""
+							temp+="<tr>"
+							temp+="	<th>ID</th>"
+							temp+="	<th>名称</th>"
+							temp+="	<th>类别</th>"
+							temp+="	<th>操作</th>"
+							temp+="</tr>"
+						var type=""
+						for(var i=0;i<data.data.length;i++){
+							if(data.data[i].type==0){
+								type="菜单";
+							}else{
+								type="链接";
+							}
+							temp+="<tr>"
+							temp+="	<td>"+data.data[i].id+"</td>"
+							temp+="	<td>"+data.data[i].name+"</td>"
+							temp+="	<td>"+type+"</td>"
+							temp+="	<td>"
+							temp+="		<div class='btn btn-info'>编辑</div>"
+							temp+="		<div class='btn btn-danger'>删除</div>"
+							temp+="	</td>"
+							temp+="</tr>"
+						}
+						$("#table").html(temp);
+					}else{
+						alert("未知错误");
+					}
+				}
+			})	
 		
-		
+		</script>
 	</body>
 </html>

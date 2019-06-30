@@ -103,4 +103,26 @@ public class DispatcherController {
 	public String assignPermissions() {
 		return "assignpermissions";
 	}
+	/*
+	 * 跳转到权限列表
+	 */
+	@RequestMapping("/permissionlist")
+	public String permissionList() {
+		return "permissionlist";
+	}
+	
+	/*
+	 * 跳转到权限详情
+	 */
+	@RequestMapping("/permissiondetail")
+	public String permissionDetail() {
+		return "permissiondetail";
+	}
+	/*
+	 * 跳转到增加权限
+	 */
+	@RequestMapping("/permissionadd")
+	public String permissionAdd() {
+		return "permissionadd";
+	}
 }

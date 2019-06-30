@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import cn.edu.pdsu.mapper.LinkMapper;
 import cn.edu.pdsu.mapper.MenuMapper;
 import cn.edu.pdsu.mapper.PermissionMapper;
+import cn.edu.pdsu.pojo.Link;
+import cn.edu.pdsu.pojo.Menu;
 import cn.edu.pdsu.pojo.Permission;
 import cn.edu.pdsu.pojo.User;
 
@@ -58,9 +60,42 @@ public class PermissionService {
 		return permissionMapper.addPermissions(map);
 	}
 
+	/*
+	 * 为角色增加权限
+	 */
 	public int delPermissions(Map<String, Object> map) {
 		return permissionMapper.delPermissions(map);
 	}
+	
+	/*
+	 * 增加新权限（菜单）
+	 */
+	public boolean addMenuPermission(Map<String, Object> map) {
+		Permission permission= (Permission) map.get("permission");
+		Menu menu= (Menu) map.get("menu");
+		//将权限信息插入act_permission表
+		permissionMapper.addPermission(permission);
+		//将权限信息插入act_menu
+		permissionMapper.addMenu(menu);
+		//将权限信息插入act_p_m
+		permissionMapper.addAct_p_m(permission.getId(),menu.getId());
+		return true;
+	}
+	/*
+	 * 增加新权限（链接）
+	 */
+	public boolean addLinkPermission(Map<String, Object> map) {
+		Permission permission= (Permission) map.get("permission");
+		Link link= (Link) map.get("link");
+		//将权限信息插入act_permission表
+		permissionMapper.addPermission(permission);
+		//将权限信息插入act_link
+		permissionMapper.addLink(link);
+		//将权限信息插入act_p_l
+		permissionMapper.addAct_p_l(permission.getId(),link.getId());
+		return true;
+	}
+	
 
 	
 
