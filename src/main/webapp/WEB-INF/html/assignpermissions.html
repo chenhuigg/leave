@@ -71,22 +71,22 @@
 		<script type="text/javascript">
 			var id=window.location.href.split("?")[1];
 			$.ajax({
-				url:"getPremissionInfoById",
+				url:"getPermissionInfoById",
 				data:id,
 				success:function(data){
 					if(data.success){
 						var role=data.data.role;
-						var hadPremissions=data.data.hadPremissions;
-						var unPremissions=data.data.unPremissions;
+						var hadPermissions=data.data.hadPermissions;
+						var unPermissions=data.data.unPermissions;
 						var un="";
 						$("#rolename").text(role.rolename);
-						for(var i=0;i<unPremissions.length;i++){
-							un+="<option value='"+unPremissions[i].id+"'>"+unPremissions[i].name+"</option>";
+						for(var i=0;i<unPermissions.length;i++){
+							un+="<option value='"+unPermissions[i].id+"'>"+unPermissions[i].name+"</option>";
 						}
 						$("#un").html(un);
 						var had="";
-						for(var i=0;i<hadPremissions.length;i++){
-							had+="<option value='"+hadPremissions[i].id+"'>"+hadPremissions[i].name+"</option>";
+						for(var i=0;i<hadPermissions.length;i++){
+							had+="<option value='"+hadPermissions[i].id+"'>"+hadPermissions[i].name+"</option>";
 						}
 						$("#had").html(had);
 					}else{
@@ -97,7 +97,7 @@
 			//添加权限
 			$("#add").click(function(){
 				$.ajax({
-					url:"addPremission",
+					url:"addPermission",
 					data:id+"&"+$("#leftform").serialize(),
 					success:function(data){
 						if(data.success){
@@ -111,7 +111,7 @@
 			//删除权限
 			$("#del").click(function(){
 				$.ajax({
-					url:"delPremission",
+					url:"delPermission",
 					data:id+"&"+$("#rightform").serialize(),
 					success:function(data){
 						if(data.success){

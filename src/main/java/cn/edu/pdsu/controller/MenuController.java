@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cn.edu.pdsu.pojo.AjaxResult;
 import cn.edu.pdsu.pojo.User;
-import cn.edu.pdsu.service.PremissionService;
+import cn.edu.pdsu.service.PermissionService;
 
 @RestController
 public class MenuController {
 	@Autowired
-	private PremissionService premissionService;
+	private PermissionService permissionService;
 	
 	@RequestMapping("/menu")
 	public Object getMenu(HttpSession session) {
@@ -23,7 +23,7 @@ public class MenuController {
 		try {
 			User user=(User) session.getAttribute("user");
 			if(user!=null) {
-				List<String> menus = premissionService.getMenuByPreission(user);
+				List<String> menus = permissionService.getMenuByPerission(user);
 				ajaxResult.setData(menus);
 				ajaxResult.setSuccess(true);
 			}

@@ -7,7 +7,7 @@ public class Role {
 	private String id;
 	private String rolename;
 	private String time;
-	private Set<Premission> premissions=new HashSet<>();
+	private Set<Permission> premissions=new HashSet<>();
 	public String getId() {
 		return id;
 	}
@@ -23,10 +23,10 @@ public class Role {
 	public Role() {
 		super();
 	}
-	public Set<Premission> getPremissions() {
+	public Set<Permission> getPremissions() {
 		return premissions;
 	}
-	public void setPremissions(Set<Premission> premissions) {
+	public void setPremissions(Set<Permission> premissions) {
 		this.premissions = premissions;
 	}
 	public String getTime() {

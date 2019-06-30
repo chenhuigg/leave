@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>权限列表</title>
+		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+		<script type="text/javascript" src="js/jquery-1.11.0.min.js" ></script>
+		<script type="text/javascript" src="bootstrap/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+			<div class="container">
+				<div class="navbar-header">
+						<div class="navbar-brand">
+							<a href="permissions.html" style="text-decoration: none;color: gray;">请假管理系统</a>
+						</div>
+					<div class="navbar-toggle" data-toggle="collapse" data-target=".collapse">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</div>
+				</div>
+				<div class="pull-right navbar-collapse collapse">
+					<div class="navbar-btn">
+						<span>您好</span><label><a href="usermain.html">管理员</a></label>
+						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
+						<a href="login.html"><button class="btn btn-danger">退出</button></a>
+					</div>
+				</div>
+			</div>
+		</nav>
+		
+		<!--权限列表-->
+		<div class="container">
+			<div class="btn btn-primary pull-right">新增权限</div>
+			<div class="h3 text-center">权限列表</div>
+			<table class="table table-hover table-striped">
+				<tr>
+					<th>ID</th>
+					<th>名称</th>
+					<th>类别</th>
+					<th>操作</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td>请假审批</td>
+					<td>菜单</td>
+					<td>
+						<div class="btn btn-info">编辑</div>
+						<div class="btn btn-danger">删除</div>
+					</td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td>提交请假申请</td>
+					<td>链接</td>
+					<td>
+						<div class="btn btn-info">编辑</div>
+						<div class="btn btn-danger">删除</div>
+					</td>
+				</tr>
+			</table>
+		</div>
+		
+		
+	</body>
+</html>

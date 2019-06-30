@@ -12,12 +12,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.edu.pdsu.pojo.User;
-import cn.edu.pdsu.service.PremissionService;
+import cn.edu.pdsu.service.PermissionService;
 //用于实现权限的控制
 @Component
-public class PremissionFilter implements HandlerInterceptor{
+public class PermissionFilter implements HandlerInterceptor{
 	@Autowired
-	private PremissionService premissionService;
+	private PermissionService permissionService;
 	
 	@Override
 	public void afterCompletion(HttpServletRequest arg0, HttpServletResponse arg1, Object arg2, Exception arg3)
@@ -48,7 +48,7 @@ public class PremissionFilter implements HandlerInterceptor{
 			}
 		}
 		//获取所有需权限的路径
-		List<String> links = premissionService.getAllLinks();
+		List<String> links = permissionService.getAllLinks();
 		for (String link : links) {
 			if(uri.contains(link)) {
 				//获取拥有权限的路径
@@ -58,7 +58,7 @@ public class PremissionFilter implements HandlerInterceptor{
 					response.sendError(402,"无权访问");
 					return false;
 				}
-				List<String> myLists = premissionService.getLinksByPreission(user);
+				List<String> myLists = permissionService.getLinksByPerission(user);
 				//放到Session的urls中
 				session.setAttribute("urls", myLists);
 				if(myLists.contains(link)) {

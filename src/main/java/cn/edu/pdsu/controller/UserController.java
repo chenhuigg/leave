@@ -182,8 +182,6 @@ public class UserController {
 	 */
 	@RequestMapping("/editsave")
 	public Object editsave(User user) {
-		System.out.println(user.getId());
-		System.out.println(user.getUsername());
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
 			int i= userService.editsave(user);

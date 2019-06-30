@@ -3,7 +3,7 @@ package cn.edu.pdsu.pojo;
 import java.util.HashSet;
 import java.util.Set;
 
-public class Premission {
+public class Permission {
 	private String id;
 	private String name;
 	private String type;
@@ -17,7 +17,7 @@ public class Premission {
 	private Set<Link> links=new HashSet<>();
 	@Override
 	public boolean equals(Object obj) {
-		Premission premission=(Premission) obj;
+		Permission premission=(Permission) obj;
 		return this.id.equals(premission.id);
 	}
 	public Set<Menu> getMenus() {
@@ -44,7 +44,7 @@ public class Premission {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Premission() {
+	public Permission() {
 		super();
 	}
 }

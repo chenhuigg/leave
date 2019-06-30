@@ -18,7 +18,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="delUsers" >
 		DELETE FROM act_user
 		WHERE id IN
-		<foreach collection="ids" item="id" open="(" close=")" separator=",">
+		<foreach collection="array" item="id" open="(" close=")" separator=",">
 			#{id}
 		</foreach>
 	</insert>

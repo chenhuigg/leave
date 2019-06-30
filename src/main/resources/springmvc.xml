@@ -23,7 +23,7 @@
 			<mvc:exclude-mapping path="/bootstrap/**"/>
 			<mvc:exclude-mapping path="/css/**"/>
 			<mvc:exclude-mapping path="/img/**"/>
-			<bean class="cn.edu.pdsu.filter.PremissionFilter"></bean>
+			<bean class="cn.edu.pdsu.filter.PermissionFilter"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
 	

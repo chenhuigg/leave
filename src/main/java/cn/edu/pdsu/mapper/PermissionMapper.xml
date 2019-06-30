@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.pdsu.mapper.PermissionMapper">
+	<insert id="addPermissions">
+		INSERT INTO act_r_p (id,roleid,permissionid) VALUES
+		<foreach collection="ids" item="permissionid" separator=",">
+			(UUID(),#{roleid},#{permissionid})
+		</foreach>
+	</insert>
+	<!-- 删除权限 -->
+	<delete id="delPermissions">
+		DELETE FROM act_r_p
+		WHERE roleid=#{roleid} AND permissionid IN
+		<foreach collection="ids" open="(" close=")" separator="," item="permissionid">
+			#{permissionid}
+		</foreach>
+	</delete>
+	
+</mapper>

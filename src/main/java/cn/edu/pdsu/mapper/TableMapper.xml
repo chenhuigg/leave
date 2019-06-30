@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		INNER JOIN act_user
 		ON act_table.userid=act_user.id
 		WHERE approveid=#{id}
-		ORDER BY time DESC
+		ORDER BY act_table.time DESC
 	</select>
 
 </mapper>
