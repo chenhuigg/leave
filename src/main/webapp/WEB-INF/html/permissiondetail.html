@@ -32,21 +32,61 @@
 		
 		<div class="container">
 			<h3 class="text-center">编辑权限</h3>
-			<form style="width: 300px;" class="center-block">
-				<input type="hidden" id="" name="" value="1" /><br />
+			<form id="form" style="width: 300px;" class="center-block">
 				<label>权限名称</label>
-				<input class="form-control" id="" name="" type="text" /><br />
+				<input class="form-control" id="name" name="name" type="text" /><br />
 				<label>权限类别</label>
-				<select name="type" class="form-control">
+				<select id="type" name="type" name="type" class="form-control">
 					<option value="0">菜单</option>
 					<option value="1">链接</option>
 				</select><br />
 				<label>权限详情</label>
-				<textarea style="overflow-y:auto;height: 130px;" class="form-control" id="" name="" ><a href="approvelist.html"><span class="btn btn-primary">请假审批</span></a><br /><br /></textarea><br />
-				<button class="btn-block btn btn-success">提交修改</button>
+				<textarea id="detail" name="resource" style="overflow-y:auto;height: 130px;" class="form-control" id="" name="" ><a href="approvelist.html"><span class="btn btn-primary">请假审批</span></a><br /><br /></textarea><br />
+				<div id="submit" class="btn-block btn btn-success">提交修改</div>
 			</form>
 		</div>
-		
-		
+		<script type="text/javascript">
+			var id=window.location.href.split("?")[1];
+			var resourceid;
+			$.ajax({
+				url:"getPermissionDetailById",
+				data:id,
+				success:function(data){
+					if(data.success){
+						$("#name").val(data.data.name);
+						if(data.data.type=="0"){
+							$("#type").val("0");
+							$("#detail").val(data.data.menu.html);
+							resourceid=data.data.menu.id;
+						}else if(data.data.type=="1"){
+							$("#type").val("1");
+							$("#detail").val(data.data.link.link);
+							resourceid=data.data.link.id;
+						}
+					}else{
+						alert("请求数据失败")
+					}
+				}
+			})
+			$("#submit").click(function(){
+				var name= $("#name").val();
+				var type=$("#type").val();
+				var resource=$("#detail").val();
+				var myid=id.split("=")[1];
+				$.ajax({
+					url:"putPermission",
+					data:{"id":myid,"name":name,"type":type,"resourceid":resourceid,"resource":resource},
+					success:function(data){
+						if(data.success){
+							alert("修改成功");
+							window.location.href="permissionlist.html";
+						}else{
+							alert("修改失败");
+						}
+					} 
+				})
+			})
+			
+		</script>
 	</body>
 </html>

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import cn.edu.pdsu.pojo.Link;
 import cn.edu.pdsu.pojo.Menu;
@@ -20,7 +21,7 @@ public interface PermissionMapper {
 			"INNER JOIN act_r_p r_p " + 
 			"ON p.id=r_p.permissionid " + 
 			"WHERE r_p.roleid=#{id}")
-	List<Permission> getPermissionById(String id);
+	List<Permission> getPermissionByRoleId(String id);
 
 	int addPermissions(Map<String, Object> map);
 
@@ -43,6 +44,20 @@ public interface PermissionMapper {
 
 	int delListPermission(Permission permission);
 
-	Permission getPermissionDetailById(String id);
+	@Select("SELECT * FROM act_permission WHERE id=#{id}")
+	Permission getPermissionById(String id);
 
+	Permission getResourceByPermission(Permission permission);
+
+	@Update("UPDATE act_permission SET name=#{name},type=#{type} WHERE id=#{id}")
+	void updatePermission(Permission permission);
+
+	@Update("UPDATE act_menu SET html=#{html} WHERE id=#{id}")
+	void updateMenu(Menu menu);
+
+	@Update("UPDATE act_link SET link=#{link} WHERE id=#{id}")
+	void updateLink(Link link);
+
+	
+	
 }

@@ -53,7 +53,7 @@ public class PermissionService {
 	 * 根据角色id获取角色已分配的权限
 	 */
 	public List<Permission> getHadPermissionByPermissionId(String id) {
-		return permissionMapper.getPermissionById(id);
+		return permissionMapper.getPermissionByRoleId(id);
 	}
 
 	public int addPermissions(Map<String, Object> map) {
@@ -103,12 +103,44 @@ public class PermissionService {
 	/*
 	 * 根据权限Id获取权限详情
 	 */
-	public Permission getPermissionDetailById(String id) {
-		return permissionMapper.getPermissionDetailById(id);
+	public Permission getPermissionById(String id) {
+		return permissionMapper.getPermissionById(id);
 	}
 
-	
-	
+	/*
+	 * 通过权限id和权限类型获得资源
+	 */
+	public Permission getResourceByPermission(Permission permission) {
+		return permissionMapper.getResourceByPermission(permission);
+	}
+
+	public boolean updatePermission(Map<String, Object> map) {
+		//获取权限信息
+		Permission permission=(Permission) map.get("permission");
+		String resourceid=(String) map.get("resourceid");
+		String resource=(String) map.get("resource");
+		//更新权限表
+		permissionMapper.updatePermission(permission);
+		//获取资源信息
+		if(permission.getType().equals("0")) {
+			Menu menu=new Menu();
+			menu.setId(resourceid);
+			menu.setHtml(resource);
+			//更新菜单表
+			permissionMapper.updateMenu(menu);
+		}else if(permission.getType().equals("1")) {
+			Link link=new Link();
+			link.setId(resourceid);
+			link.setLink(resource);
+			//更新链接表
+			permissionMapper.updateLink(link);
+		}
+
+		//更新资源表
+		
+		return true;
+	}
+
 
 	
 

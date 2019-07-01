@@ -99,11 +99,50 @@ public class PermissionController {
 	public Object getPermissionDetailById(String id) {
 		AjaxResult ajaxResult=new AjaxResult();
 		try {
-			Permission permission= permissionService.getPermissionDetailById(id);
+			//通过权限id查找权限信息，获得type
+			Permission permission= permissionService.getPermissionById(id);
+			//通过type获得权限具体信息
+			if(permission!=null) {
+				Permission permission2= permissionService.getResourceByPermission(permission);
+				if(permission2!=null) {
+					permission.setLink(permission2.getLink());
+					permission.setMenu(permission2.getMenu());
+					if(permission!=null) {
+						ajaxResult.setData(permission);
+						ajaxResult.setSuccess(true);
+					}
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return ajaxResult;
 	}
 	
+	/*
+	 * 更新权限内容
+	 */
+	@RequestMapping("/putPermission")
+	public Object putPermission(Permission permission,String resourceid,String resource) {
+		AjaxResult ajaxResult =new AjaxResult();
+		System.out.println(permission.getId());
+		System.out.println(permission.getName());
+		System.out.println(permission.getType());
+		System.out.println(resourceid);
+		System.out.println(resource);
+		try {
+			Map<String, Object> map=new HashMap<>();
+			map.put("permission", permission);
+			map.put("resourceid", resourceid);
+			map.put("resource", resource);
+			//更新权限的内容
+			boolean bool=permissionService.updatePermission(map);
+			if(bool) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
 }
