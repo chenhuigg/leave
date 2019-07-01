@@ -3,13 +3,17 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="cn.edu.pdsu.mapper.PermissionMapper">
+	<resultMap type="cn.edu.pdsu.pojo.Permission" id="permissionMap">
+		<result property="link.link" column="link"/>
+		<result property="menu.html" column="menu"/>
+	</resultMap>
 	<insert id="addPermissions">
 		INSERT INTO act_r_p (id,roleid,permissionid) VALUES
 		<foreach collection="ids" item="permissionid" separator=",">
 			(UUID(),#{roleid},#{permissionid})
 		</foreach>
 	</insert>
-	<!-- 删除权限 -->
+	<!-- 删除用户的权限 -->
 	<delete id="delPermissions">
 		DELETE FROM act_r_p
 		WHERE roleid=#{roleid} AND permissionid IN
@@ -17,5 +21,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{permissionid}
 		</foreach>
 	</delete>
+	
+	<!-- 删除权限信息 -->
+	<delete id="delListPermission" parameterType="cn.edu.pdsu.pojo.Permission">
+		<if test='"1".equals(type)'>
+			DELETE act_permission,act_link,act_p_l
+			FROM act_permission
+			INNER JOIN act_p_l
+			ON act_permission.id=act_p_l.p_id 
+			INNER JOIN act_link 
+			ON act_p_l.l_id=act_link.id 
+			WHERE act_permission.id=#{id}
+		</if>
+		<if test='"0".equals(type)'>
+			DELETE act_permission,act_menu,act_p_m
+			FROM act_permission
+			INNER JOIN act_p_m
+			ON act_permission.id=act_p_m.p_id 
+			INNER JOIN act_menu 
+			ON act_p_m.m_id=act_menu.id 
+			WHERE act_permission.id=#{id}
+		</if>
+	</delete>
+	
+	<!-- <select id="getPermissionDetailById" parameterMap="permissionMap">
+		<if test="">
+			SELECT * FROM act_permission,act_p_l,act_link
+			WHERE act_permission.id=act_p_l.p_id AND act_link.id=act_p_l.l_id
+			AND act_permission.id=#{id}
+		</if>
+		<if test="">
+			SELECT * FROM act_permission,act_p_l,act_link
+			WHERE act_permission.id=act_p_l.p_id AND act_link.id=act_p_l.l_id
+			AND act_permission.id=#{id}
+		</if>
+	</select> -->
 	
 </mapper>

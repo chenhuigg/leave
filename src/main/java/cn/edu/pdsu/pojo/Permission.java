@@ -8,7 +8,21 @@ public class Permission {
 	private String name;
 	private String type;
 	private String time;
+	private Link link;
+	private Menu menu;
 	
+	public Link getLink() {
+		return link;
+	}
+	public void setLink(Link link) {
+		this.link = link;
+	}
+	public Menu getMenu() {
+		return menu;
+	}
+	public void setMenu(Menu menu) {
+		this.menu = menu;
+	}
 	public String getTime() {
 		return time;
 	}

@@ -41,4 +41,8 @@ public interface PermissionMapper {
 	@Insert("INSERT INTO act_p_l(p_id,l_id) VALUES(#{p_id},#{l_id})")
 	void addAct_p_l(@Param("p_id")String id,@Param("l_id") String id2);
 
+	int delListPermission(Permission permission);
+
+	Permission getPermissionDetailById(String id);
+
 }

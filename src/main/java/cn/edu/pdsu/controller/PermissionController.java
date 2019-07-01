@@ -75,5 +75,35 @@ public class PermissionController {
 		}
 		return ajaxResult;
 	}
+	/*
+	 * 删除权限（列表页，单个权限）
+	 */
+	@RequestMapping("/delListPermission")
+	public Object delListPermission(Permission permission) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			int i=permissionService.delListPermission(permission);
+			if(i>0) {
+				ajaxResult.setSuccess(true);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
+	
+	/*
+	 * 根据权限Id获取权限详情
+	 */
+	@RequestMapping("/getPermissionDetailById")
+	public Object getPermissionDetailById(String id) {
+		AjaxResult ajaxResult=new AjaxResult();
+		try {
+			Permission permission= permissionService.getPermissionDetailById(id);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ajaxResult;
+	}
 	
 }

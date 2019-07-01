@@ -95,6 +95,19 @@ public class PermissionService {
 		permissionMapper.addAct_p_l(permission.getId(),link.getId());
 		return true;
 	}
+
+	public int delListPermission(Permission permission) {
+		return permissionMapper.delListPermission(permission);
+	}
+
+	/*
+	 * 根据权限Id获取权限详情
+	 */
+	public Permission getPermissionDetailById(String id) {
+		return permissionMapper.getPermissionDetailById(id);
+	}
+
+	
 	
 
 	
