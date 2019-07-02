@@ -6,8 +6,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap type="cn.edu.pdsu.pojo.Permission" id="permissionMap">
 		<result column="m_id" property="menu.id"/>
 		<result column="html" property="menu.html"/>
-		<result column="l_id" property="link.html"/>
-		<result column="link" property="link.html"/>
+		<result column="l_id" property="link.id"/>
+		<result column="link" property="link.link"/>
 	</resultMap>
 	<insert id="addPermissions">
 		INSERT INTO act_r_p (id,roleid,permissionid) VALUES
@@ -48,13 +48,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getResourceByPermission" parameterType="cn.edu.pdsu.pojo.Permission" resultMap="permissionMap">
 		<if test='"0".equals(type)'>
-			SELECT *,id m_id FROM act_menu
+			SELECT id m_id,html FROM act_menu
 			INNER JOIN act_p_m
 			ON act_p_m.m_id=act_menu.id
 			WHERE act_p_m.p_id=#{id}
 		</if> 
 		<if test='"1".equals(type)'>
-			SELECT *,id l_id FROM act_link
+			SELECT id l_id,link FROM act_link
 			INNER JOIN act_p_l
 			ON act_p_l.l_id=act_link.id
 			WHERE act_p_l.p_id=#{id}

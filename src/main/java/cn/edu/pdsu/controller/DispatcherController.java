@@ -106,7 +106,7 @@ public class DispatcherController {
 	/*
 	 * 跳转到权限列表
 	 */
-	@RequestMapping("/permissionlist")
+	@RequestMapping("/permissionlist.html")
 	public String permissionList() {
 		return "permissionlist";
 	}
@@ -114,14 +114,14 @@ public class DispatcherController {
 	/*
 	 * 跳转到权限详情
 	 */
-	@RequestMapping("/permissiondetail")
+	@RequestMapping("/permissiondetail.html")
 	public String permissionDetail() {
 		return "permissiondetail";
 	}
 	/*
 	 * 跳转到增加权限
 	 */
-	@RequestMapping("/permissionadd")
+	@RequestMapping("/permissionadd.html")
 	public String permissionAdd() {
 		return "permissionadd";
 	}

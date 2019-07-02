@@ -125,11 +125,6 @@ public class PermissionController {
 	@RequestMapping("/putPermission")
 	public Object putPermission(Permission permission,String resourceid,String resource) {
 		AjaxResult ajaxResult =new AjaxResult();
-		System.out.println(permission.getId());
-		System.out.println(permission.getName());
-		System.out.println(permission.getType());
-		System.out.println(resourceid);
-		System.out.println(resource);
 		try {
 			Map<String, Object> map=new HashMap<>();
 			map.put("permission", permission);
