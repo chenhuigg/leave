@@ -22,7 +22,7 @@
 				</div>
 				<div class="pull-right navbar-collapse collapse">
 					<div class="navbar-btn">
-						<span>您好</span><label><a href="usermain.html">管理员</a></label>
+						<span>您好</span><label><a id="usernameshow" href="usermain.html">管理员</a></label>
 						<a href="usermain.html"><button class="btn text-success">个人设置</button></a>
 						<a href="login.html"><button class="btn btn-danger">退出</button></a>
 					</div>
@@ -46,6 +46,17 @@
 			</form>
 		</div>
 		<script type="text/javascript">
+			$.ajax({
+				url:"getUser",
+				success:function(data){
+					if(data.success==true){
+						$("#usernameshow").text(data.data)
+					}else{
+						alert("用户状态不存在，请重新登录");
+						window.location.href="login.html";
+					}
+				}
+			})
 			var id=window.location.href.split("?")[1];
 			var resourceid;
 			$.ajax({
